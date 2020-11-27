@@ -80,7 +80,7 @@ class Database
             }
         endif;
 
-        $this->stmt->bindValue($param);
+        $this->stmt->bindValue($param, $value, $type);
     }
 
     /**

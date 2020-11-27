@@ -9,6 +9,7 @@ trait Sanitize
         $data = stripslashes($data);
         $data = strip_tags($data);
         $data = htmlspecialchars($data);
+        $data = trim($data);
         return $data;
     }
 }

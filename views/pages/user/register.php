@@ -10,7 +10,7 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="email" name="email" class="form-control <?= !empty($data['email_err']) ? 'is-invalid' : ''?>" value="<?= $data['email']?>" id="email" placeholder="Email">
+                        <input type="text" name="email" class="form-control <?= !empty($data['email_err']) ? 'is-invalid' : ''?>" value="<?= $data['email']?>" id="email" placeholder="Email">
                         <span class="invalid-feedback"><?= $data['email_err']?></span>
                     </div>
 
