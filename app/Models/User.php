@@ -18,6 +18,31 @@ class User extends Model
         }
     }
 
+    public function signin($email, $password)
+    {
+        $this->db->query('SELECT * FROM users WHERE email = :email');
+        $this->db->bind(":email", $email);
+        $row = $this->db->single();
+        $hash_pass = $row[0]['password'];
+
+        if(password_verify($password, $hash_pass))
+        {
+            return $row;
+        }
+        else{
+            return false;
+        }
+
+
+        if($this->db->execute())
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     public function findUserByEmail($email)
     {
         $this->db->query("SELECT * FROM users WHERE email = :email");

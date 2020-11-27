@@ -2,7 +2,8 @@
     <div class="row">
         <div class="col-md-6 mx-auto">
             <div class="card card-body bg-light mt-5">
-                <h3>Create account</h3>
+                
+                <h3>Login account</h3>
                 <form method="post" action="<?= URLROOT?>/usercontroller/login">
 
                     <div class="form-group">

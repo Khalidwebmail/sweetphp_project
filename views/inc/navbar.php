@@ -6,20 +6,32 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="<?= URLROOT?>/pagecontroller/index">Home</a>
+                <a class="nav-link" href="<?= URLROOT?>/homecontroller/index">Home</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="<?= URLROOT?>/pagecontroller/about">About</a>
+                <a class="nav-link" href="<?= URLROOT?>/homecontroller/about">About</a>
             </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="<?= URLROOT?>/usercontroller/login">Login</a>
-                <a class="dropdown-item" href="<?= URLROOT?>/usercontroller/register">Register</a>
-                </div>
-            </li>
+            <?php if(!isset($_SESSION['user_id'])) { ?>
+                <li class="nav-item active">
+                    <a class="nav-link" href="<?= URLROOT?>/usercontroller/login">Login</a>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="<?= URLROOT?>/usercontroller/register">Register</a>
+                </li>
+            <?php } ?>
+
+            <?php if(isset($_SESSION['user_id'])) { ?>
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Logout
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="<?= URLROOT?>/usercontroller/logout"><?= $_SESSION['user_name']?></a>
+                    </div>
+                </li>
+            <?php }?>
         </ul>
     </div>
 </nav>

@@ -59,7 +59,42 @@ class UserController extends Controller
     
     public function login()
     {
-        return $this->view('pages/user/login', $this->data);
+        if($_SERVER['REQUEST_METHOD'] == 'POST')
+        {
+            // Sanitize POST data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            $this->data = [
+                'email' => $this->filter($_POST['email']),
+                'password' => $this->filter($_POST['password']),
+                'email_err' => '',
+                'password_err' => '',
+            ];
+
+            
+            $this->validateLogin();
+            // Make sure errors are empty
+            if(empty($this->data['email_err']) && empty($this->data['password_err']))
+            {
+                
+                $loggedin = $this->user->signin($this->data['email'], $this->data['password']);
+                if($loggedin)
+                {
+                    $this->createUserSession($loggedin);
+                }
+                else{
+                    $this->data['password_err'] = 'Incorrect password';
+                    $this->view('pages/user/login', $this->data);
+                }
+
+            } else {
+                // Load view with errors
+                $this->view('pages/user/login', $this->data);
+            }            
+        }
+
+        else{
+            return $this->view('pages/user/login', $this->data);
+        }
     }
 
     private function validate()
@@ -95,5 +130,49 @@ class UserController extends Controller
             $this->data['confirm_password_err'] = 'Passwords do not match';
             }
         }
+    }
+
+    private function validateLogin()
+    {
+        if(!$this->user->findUserByEmail($this->data['email']))
+        {
+            $this->data['email_err'] = 'Email address not fount';
+        }
+
+        // Validate Email
+        if(empty($this->data['email'])){
+            $this->data['email_err'] = 'Please enter email';
+        }
+
+        // Validate Password
+        if(empty($this->data['password'])){
+            $this->data['password_err'] = 'Pleae enter password';
+        } elseif(strlen($this->data['password']) < 6){
+            $this->data['password_err'] = 'Password must be at least 6 characters';
+        }
+    }
+
+    private function createUserSession($user)
+    {
+        $_SESSION['user_id'] = $user[0]['id'];
+        $_SESSION['user_name'] = $user[0]['name'];
+        $_SESSION['user_email'] = $user[0]['email'];
+        Redirect::to('postcontroller/index');
+    }
+
+    public function logout()
+    {
+        unset($_SESSION['user_id']);
+        unset($_SESSION['user_name']);
+        unset($_SESSION['user_email']);
+        session_destroy();
+        Redirect::to('usercontroller/login');
+    }
+
+    public function isLoggedIn()
+    {
+        if(isset($_SESSION['user_id']))
+            return true;
+        return false;
     }
 }

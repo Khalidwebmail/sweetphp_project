@@ -5,6 +5,7 @@
   require_once "../config/config.php";
   require_once "Classes/Str.php";
   require_once "Classes/Redirect.php";
+  require_once "Classes/Session.php";
   /**
    * load class automatically respect of demand
    */
