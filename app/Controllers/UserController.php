@@ -38,9 +38,14 @@ class UserController extends Controller
             
             $this->validate();
             // Make sure errors are empty
-            if(empty($this->data['email_err']) && empty($this->data['name_err']) && empty($this->data['password_err']) && empty($this->data['confirm_password_err'])){
-                // Validated
-                die('SUCCESS');
+            if(empty($this->data['email_err']) && empty($this->data['name_err']) && empty($this->data['password_err']) && empty($this->data['confirm_password_err']))
+            {
+                
+                $this->data['password'] = password_hash($this->data['password'], PASSWORD_DEFAULT);
+
+                $this->user->signup($this->data);
+                Redirect::to('usercontroller/login');
+
             } else {
                 // Load view with errors
                 $this->view('pages/user/register', $this->data);
@@ -54,7 +59,7 @@ class UserController extends Controller
     
     public function login()
     {
-        
+        return $this->view('pages/user/login', $this->data);
     }
 
     private function validate()
