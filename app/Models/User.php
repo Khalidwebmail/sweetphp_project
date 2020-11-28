@@ -23,7 +23,7 @@ class User extends Model
         $this->db->query('SELECT * FROM users WHERE email = :email');
         $this->db->bind(":email", $email);
         $row = $this->db->single();
-        $hash_pass = $row[0]['password'];
+        $hash_pass = $row[0]->password;
 
         if(password_verify($password, $hash_pass))
         {

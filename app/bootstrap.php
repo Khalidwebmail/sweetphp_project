@@ -6,6 +6,7 @@
   require_once "Classes/Str.php";
   require_once "Classes/Redirect.php";
   require_once "Classes/Session.php";
+  require_once "Helper/function.php";
   /**
    * load class automatically respect of demand
    */

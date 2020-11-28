@@ -2,7 +2,7 @@
 
 final class Str
 {
-    public static function slug($text)
+    public static function slug(array $text)
     {
         // replace non letter or digits by -
         $text = preg_replace('~[^\pL\d]+~u', '-', $text);

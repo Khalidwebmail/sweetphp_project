@@ -75,8 +75,8 @@ class UserController extends Controller
             // Make sure errors are empty
             if(empty($this->data['email_err']) && empty($this->data['password_err']))
             {
-                
                 $loggedin = $this->user->signin($this->data['email'], $this->data['password']);
+                // dd($loggedin);
                 if($loggedin)
                 {
                     $this->createUserSession($loggedin);
@@ -152,11 +152,12 @@ class UserController extends Controller
         }
     }
 
-    private function createUserSession($user)
+    private function createUserSession(array $user)
     {
-        $_SESSION['user_id'] = $user->id;
-        $_SESSION['user_name'] = $user->name;
-        $_SESSION['user_email'] = $user->email;
+        $_SESSION['user_id'] = $user[0]->id;
+        $_SESSION['user_name'] = $user[0]->name;
+        $_SESSION['user_email'] = $user[0]->email;
+
         Redirect::to('postcontroller/index');
     }
 

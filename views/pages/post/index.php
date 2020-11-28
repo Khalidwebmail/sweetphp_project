@@ -17,9 +17,8 @@
                         <td><?= $post->created_at?></td>
                         <td><?= $post->name?></td>
                         <td>
-                            <a href="<?= URLROOT?>/postcontroller/show/<?= $post->id?>">Show</a> |
-                            <a href="">Edit</a> |
-                            <a href="">Delete</a> |
+                            <a href="<?= URLROOT?>/postcontroller/show/<?= $post->id?>">Show</a>|
+                            <a href="<?= URLROOT?>/postcontroller/delete/<?= $post->id?>">Delete</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -27,7 +26,7 @@
         </div>
 
         <div class="col-md-6">
-            <a href="<?= URLROOT?>/postcontroller/create" class="btn btn-primary pull-right">Add post</a>
+            <a href="<?= URLROOT?>/postcontroller/create" class="btn btn-primary pull-right">Add post</a> <br>
         </div>
     </div>
 <?php require APPROOT . "/views/inc/footer.php" ?>      
