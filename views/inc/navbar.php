@@ -25,10 +25,10 @@
                 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Logout
+                        <?= $_SESSION['user_name']?>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="<?= URLROOT?>/usercontroller/logout"><?= $_SESSION['user_name']?></a>
+                        <a class="dropdown-item" href="<?= URLROOT?>/usercontroller/logout">Signout</a>
                     </div>
                 </li>
             <?php }?>

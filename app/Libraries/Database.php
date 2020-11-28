@@ -101,7 +101,7 @@ class Database
     public function resultSet()
     {
         $this->execute();
-        return $this->stmt->fetchAll(PDO::FETCH_BOTH);
+        return $this->stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
     /**
@@ -112,7 +112,7 @@ class Database
     public function single()
     {
         $this->execute();
-        return $this->stmt->fetchAll(PDO::FETCH_BOTH);
+        return $this->stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
     /**

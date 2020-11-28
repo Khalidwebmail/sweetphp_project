@@ -154,9 +154,9 @@ class UserController extends Controller
 
     private function createUserSession($user)
     {
-        $_SESSION['user_id'] = $user[0]['id'];
-        $_SESSION['user_name'] = $user[0]['name'];
-        $_SESSION['user_email'] = $user[0]['email'];
+        $_SESSION['user_id'] = $user->id;
+        $_SESSION['user_name'] = $user->name;
+        $_SESSION['user_email'] = $user->email;
         Redirect::to('postcontroller/index');
     }
 
